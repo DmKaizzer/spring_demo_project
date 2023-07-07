@@ -1,0 +1,10 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        generate_statistics: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/demoproject
+    username: postgres
+    password: password!456
+    driver-class-name: org.postgresql.Driver
