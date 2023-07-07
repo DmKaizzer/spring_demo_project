@@ -1,6 +1,6 @@
-package repository;
+package com.example.demo.repository;
 
-import dao.User;
+import com.example.demo.dao.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
