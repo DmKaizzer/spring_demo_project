@@ -3,6 +3,7 @@ package com.example.demo.dao;
 import jakarta.persistence.*;
 import lombok.Data;
 
+
 @Entity
 @Table
 @Data

@@ -2,6 +2,7 @@ package com.example.demo.security;
 
 import com.example.demo.dao.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,9 +12,9 @@ import com.example.demo.repository.UserRepository;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final UserRepository repository;
-
     @Autowired
+    public final UserRepository repository;
+
     public UserDetailsServiceImpl(UserRepository repository) {
         this.repository = repository;
     }
