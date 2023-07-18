@@ -1,17 +1,18 @@
 package com.example.demo.dao;
 
-import jakarta.persistence.*;
 import lombok.Data;
+
+import jakarta.persistence.*;
 
 
 @Entity
-@Table
+@Table(name = "users")
 @Data
 public class User {
     //TODO: почему плохо генерировать ламбуком хэшкод и иквалс
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(updatable = false, nullable = false)
+    @Column(updatable = false)
     private String id;
 
     @Column
@@ -19,6 +20,9 @@ public class User {
 
     @Column
     private String password;
+
+    @Column
+    private String enabled;
 
     @Override
     public int hashCode() {

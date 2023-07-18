@@ -4,10 +4,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class MainTestController {
-
-    @GetMapping(value = "/test")
+public class AdminController {
+        @GetMapping(value = "admin")
     public String getTestData() {
-        return "test data";
+        return "test admin data";
     }
 }
