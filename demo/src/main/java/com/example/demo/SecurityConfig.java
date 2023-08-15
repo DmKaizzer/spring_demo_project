@@ -33,14 +33,7 @@ public class SecurityConfig {
 
     @Bean
     public JdbcUserDetailsManager user(PasswordEncoder encoder) {
-        UserDetails admin = User.builder()
-                .username("admin")
-                .password(encoder.encode("adm_psw"))
-                .roles("ADMIN")
-                .authorities("ADMIN")
-                .build();
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
-        jdbcUserDetailsManager.createUser(admin);
         return jdbcUserDetailsManager;
     }
 
