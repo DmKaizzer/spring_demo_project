@@ -1,0 +1,7 @@
+changeLogFile: src/main/resources/db/changelog/master.xml
+logging: debug
+driver: org.postgresql.Driver
+url: jdbc:postgresql://localhost:5432/demoproject
+
+username: postgres
+password: password!456

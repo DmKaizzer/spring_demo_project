@@ -4,6 +4,8 @@ import lombok.Data;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 
 @Entity
 @Table(name = "users")
@@ -23,6 +25,12 @@ public class User {
 
     @Column
     private String enabled;
+
+    @Column
+    private String email;
+
+    @Column
+    private Date lastActivity;
 
     @Override
     public int hashCode() {
