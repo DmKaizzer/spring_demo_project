@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/demoproject</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="H2 - demo" uuid="01aba5e2-4da6-48c7-907c-821d85aaf1aa">
+      <driver-ref>h2.unified</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.h2.Driver</jdbc-driver>
+      <jdbc-url>jdbc:h2:file:/data/demo</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

@@ -1,0 +1,94 @@
+databaseChangeLog:
+  - changeSet:
+      id: 5
+      author: YDmitriY
+      changes:
+      - createTable:
+          tableName: users
+          columns:
+            - column:
+                name: username
+                type: varchar
+            - column:
+                name: password
+                type: varchar
+            - column:
+                name: enabled
+                type: boolean
+            - column:
+                name: email
+                type: varchar(255)
+            - column:
+                name: last_activity
+                type: varchar
+            - column:
+                name: priority
+                type: int
+
+  - changeSet:
+      id: 6
+      author: YDmitriy
+      changes:
+      - insert:
+          tableName: users
+          columns:
+            - column:
+                name: username
+                value: admin
+            - column:
+                name: password
+                value: $2a$12$OonFA/O66L0JQD7ikz2yVu9MWb8lYhUANbxQHNr3OH04eDx1cle7G
+            - column:
+                name: enabled
+                value: true
+            - column:
+                name: email
+                value: admin@mail.com
+            - column:
+                name: last_activity
+                value: 2023-08-05
+            - column:
+                name: priority
+                value: 7
+      - insert:
+          tableName: users
+          columns:
+            - column:
+                name: username
+                value: user
+            - column:
+                name: password
+                value: $2a$12$OonFA/O66L0JQD7ikz2yVu9MWb8lYhUANbxQHNr3OH04eDx1cle7G
+            - column:
+                name: enabled
+                value: true
+            - column:
+                name: email
+                value: user@mail.com
+            - column:
+                name: last_activity
+                value: 2023-08-05
+            - column:
+                name: priority
+                value: 3
+      - insert:
+          tableName: users
+          columns:
+            - column:
+                name: username
+                value: supervisor
+            - column:
+                name: password
+                value: $2a$12$OonFA/O66L0JQD7ikz2yVu9MWb8lYhUANbxQHNr3OH04eDx1cle7G
+            - column:
+                name: enabled
+                value: true
+            - column:
+                name: email
+                value: supervisor@mail.com
+            - column:
+                name: last_activity
+                value: 2023-08-05
+            - column:
+                name: priority
+                value: 5

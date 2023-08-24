@@ -1,0 +1,15 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        generate_statistics: true
+    database: H2
+    database-platform: org.hibernate.dialect.H2Dialect
+  datasource:
+    url: jdbc:h2:file:/data/demo
+    username: h2
+    password: password!h2
+    driver-class-name: org.h2.Driver
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/master.yml
