@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 5
+      id: 1
       author: YDmitriY
       changes:
       - createTable:
@@ -26,7 +26,7 @@ databaseChangeLog:
                 type: int
 
   - changeSet:
-      id: 6
+      id: 2
       author: YDmitriy
       changes:
       - insert:

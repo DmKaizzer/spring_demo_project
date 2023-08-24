@@ -12,4 +12,4 @@ spring:
     driver-class-name: org.h2.Driver
   liquibase:
     enabled: true
-    change-log: classpath:db/changelog/master.yml
+    change-log: classpath:db/changelog/master-local.yml
