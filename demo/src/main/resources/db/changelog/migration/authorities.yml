@@ -1,0 +1,37 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: YDmitriY
+      changes:
+      - createTable:
+          tableName: authorities
+          columns:
+            - column:
+                name: username
+                type: varchar
+            - column:
+                name: authority
+                type: varchar
+
+  - changeSet:
+      id: 2
+      author: YDmitriy
+      changes:
+      - insert:
+          tableName: authorities
+          columns:
+            - column:
+                name: username
+                value: admin
+            - column:
+                name: authority
+                value: ADMIN
+      - insert:
+          tableName: authorities
+          columns:
+            - column:
+                name: username
+                value: user
+            - column:
+                name: authority
+                value: USER

@@ -12,4 +12,4 @@ spring:
     driver-class-name: org.postgresql.Driver
   liquibase:
     enabled: true
-    change-log: classpath:db/changelog/master.xml
+    change-log: classpath:db/changelog/master.yml

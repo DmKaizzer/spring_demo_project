@@ -1,4 +1,4 @@
-changeLogFile: src/main/resources/db/changelog/master.xml
+changeLogFile: src/main/resources/db/changelog/master.yml
 logging: debug
 driver: org.postgresql.Driver
 url: jdbc:postgresql://localhost:5432/demoproject
