@@ -1,5 +1,5 @@
 databaseChangeLog:
   - include:
-      file: db\changelog\migration\dev\users.yml
+      file: db\changelog\migration\users.yml
   - include:
-      file: db\changelog\migration\dev\authorities.yml
+      file: db\changelog\migration\authorities.yml

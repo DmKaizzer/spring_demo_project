@@ -12,6 +12,7 @@ import java.util.Date;
 @Data
 public class User {
     //TODO: почему плохо генерировать ламбуком хэшкод и иквалс
+    //TODO: outer join
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(updatable = false)

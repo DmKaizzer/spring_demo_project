@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 1
+      id: 100
       author: YDmitriY
       changes:
       - createTable:
@@ -26,7 +26,7 @@ databaseChangeLog:
                 type: int
 
   - changeSet:
-      id: 2
+      id: 101
       author: YDmitriy
       changes:
       - insert:
@@ -46,7 +46,7 @@ databaseChangeLog:
                 value: admin@mail.com
             - column:
                 name: last_activity
-                value: 2023-08-05
+                value: 2023-08-05 18:47:52.690
             - column:
                 name: priority
                 value: 7
@@ -67,7 +67,7 @@ databaseChangeLog:
                 value: user@mail.com
             - column:
                 name: last_activity
-                value: 2023-08-05
+                value: 2023-08-05 18:47:52.690
             - column:
                 name: priority
                 value: 3
@@ -88,7 +88,7 @@ databaseChangeLog:
                 value: supervisor@mail.com
             - column:
                 name: last_activity
-                value: 2023-08-05
+                value: 2023-08-05 18:47:52.690
             - column:
                 name: priority
                 value: 5
