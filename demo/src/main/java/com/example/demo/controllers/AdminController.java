@@ -5,8 +5,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AdminController {
+
     @GetMapping(value = "admin")
     public String getTestData() {
-        return "test admin data";
+            Test test = new Test();
+            System.out.println(test.ttClass.test);
+            return "test admin data";
+    }
+
+    public class Test {
+        public TtClass ttClass;
+    }
+    public class TtClass {
+        public String test;
     }
 }
