@@ -14,7 +14,7 @@ public class ControllersAspect {
     @Pointcut("within(com.example.demo.controllers..*)")
     public void callAtMyServicePublic() { }
 
-    @Around("callAtMyServicePublic()")
+    @After("callAtMyServicePublic()")
     public Object afterCallAt(ProceedingJoinPoint jp) {
         try {
             return jp.proceed();

@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AdminController {
 
+    //TODO: таблицу с составным primary_key
+
     @GetMapping(value = "admin")
     public String getTestData() {
             Test test = new Test();
