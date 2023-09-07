@@ -35,3 +35,29 @@ databaseChangeLog:
             - column:
                 name: authority
                 value: USER
+  - changeSet:
+      id: 107y
+      author: YDmitriy
+      changes:
+        - addColumn:
+            tableName: authorities
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+  - changeSet:
+      id: 109y
+      author: YDmitriy
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: username
+            baseTableName: authorities
+            constraintName: username_fk
+            onDelete: CASCADE
+            onUpdate: CASCADE
+            referencedColumnNames: username
+            referencedTableName: users

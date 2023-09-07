@@ -14,9 +14,10 @@ public class ControllersAspect {
     @Pointcut("within(com.example.demo.controllers..*)")
     public void callAtMyServicePublic() { }
 
-    @After("callAtMyServicePublic()")
+    @Around("callAtMyServicePublic()")
     public Object afterCallAt(ProceedingJoinPoint jp) {
         try {
+            logger.info(jp.toString());
             return jp.proceed();
         } catch (Throwable e) {
             String methodName = jp.getSignature().getName();

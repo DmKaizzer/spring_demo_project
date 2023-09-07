@@ -1,4 +1,7 @@
 spring:
+  h2:
+    console:
+      enabled: true
   jpa:
     properties:
       hibernate:
@@ -6,7 +9,7 @@ spring:
     database: H2
     database-platform: org.hibernate.dialect.H2Dialect
   datasource:
-    url: jdbc:h2:mem:demo
+    url: jdbc:h2:file:/data/demo
     username: h2
     password: password!h2
     driver-class-name: org.h2.Driver

@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 100
+      id: 100y
       author: YDmitriY
       changes:
       - createTable:
@@ -26,7 +26,7 @@ databaseChangeLog:
                 type: int
 
   - changeSet:
-      id: 101
+      id: 101y
       author: YDmitriy
       changes:
       - insert:
@@ -92,3 +92,35 @@ databaseChangeLog:
             - column:
                 name: priority
                 value: 5
+
+  - changeSet:
+      id: 105y
+      author: YDmitriy
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+  - changeSet:
+      id: 104y
+      author: YDmitriy
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: is_deleted
+                  type: boolean
+  - changeSet:
+      id: 107y
+      author: YDmitriy
+      changes:
+        - addUniqueConstraint:
+            tableName: users
+            columnNames: username
