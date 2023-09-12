@@ -4,6 +4,8 @@ import com.example.demo.dao.Authority;
 import com.example.demo.dao.User;
 import com.example.demo.dto.AuthorityDTO;
 import com.example.demo.repository.AuthorityRepository;
+import com.example.demo.repository.ClientRepository;
+import com.example.demo.repository.MasterRepository;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,18 +19,15 @@ import java.util.Optional;
 @RequestMapping("/admin")
 public class AdminController {
 
-
     @Autowired
     UserRepository userRepository;
     @Autowired
     AuthorityRepository authorityRepository;
+    @Autowired
+    ClientRepository clientRepository;
+    @Autowired
+    MasterRepository masterRepository;
 
-    //TODO: таблицу с составным primary_key
-
-    @GetMapping(value = "/get-test-data")
-    public String getTestData() {
-        return "test admin data";
-    }
     @GetMapping(value = "/get-all-users")
     public List<User> getAllUsers() {
         List<User> users = userRepository.findAll();

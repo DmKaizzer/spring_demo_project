@@ -1,0 +1,34 @@
+package com.example.demo.dao;
+
+import jakarta.persistence.*;
+import lombok.Data;
+
+@Entity
+@Table(name = "clients")
+@Data
+public class Client {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cleint_id", nullable = false, updatable = false)
+    private Long clientId;
+
+    @OneToOne
+    @JoinColumn(name = "login", referencedColumnName = "username")
+    private User username;
+
+    @Column
+    private Integer age;
+
+    @Column
+    private String name;
+
+    @Column(name = "last_name")
+    private String lastName;
+
+    @ManyToOne
+    @JoinColumn(name = "master_login", referencedColumnName = "login")
+    private Master master;
+
+
+}

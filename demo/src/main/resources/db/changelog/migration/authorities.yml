@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 11
+      id: 11y_
       author: YDmitriY
       changes:
       - createTable:
@@ -14,7 +14,7 @@ databaseChangeLog:
                 type: varchar
 
   - changeSet:
-      id: 12
+      id: 12y_
       author: YDmitriy
       changes:
       - insert:
@@ -36,21 +36,7 @@ databaseChangeLog:
                 name: authority
                 value: USER
   - changeSet:
-      id: 107y
-      author: YDmitriy
-      changes:
-        - addColumn:
-            tableName: authorities
-            columns:
-              - column:
-                  name: id
-                  type: int
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-  - changeSet:
-      id: 109y
+      id: 110y_
       author: YDmitriy
       changes:
         - addForeignKeyConstraint:
@@ -61,3 +47,70 @@ databaseChangeLog:
             onUpdate: CASCADE
             referencedColumnNames: username
             referencedTableName: users
+  - changeSet:
+      id: 111y_
+      author: YDmitriy
+      changes:
+        - addPrimaryKey:
+            tableName: authorities
+            constraintName: auth_pk
+            columnNames: username, authority
+
+  - changeSet:
+      id: 113auth_
+      author: YDmitriy
+      changes:
+        - insert:
+            tableName: authorities
+            columns:
+              - column:
+                  name: username
+                  value: first_login
+              - column:
+                  name: authority
+                  value: ADMIN
+        - insert:
+            tableName: authorities
+            columns:
+              - column:
+                  name: username
+                  value: second_login
+              - column:
+                  name: authority
+                  value: ADMIN
+        - insert:
+            tableName: authorities
+            columns:
+              - column:
+                  name: username
+                  value: third_login
+              - column:
+                  name: authority
+                  value: ADMIN
+        - insert:
+            tableName: authorities
+            columns:
+              - column:
+                  name: username
+                  value: first_client_login
+              - column:
+                  name: authority
+                  value: USER
+        - insert:
+            tableName: authorities
+            columns:
+              - column:
+                  name: username
+                  value: second_client_login
+              - column:
+                  name: authority
+                  value: ADMIN
+        - insert:
+            tableName: authorities
+            columns:
+              - column:
+                  name: username
+                  value: third_client_login
+              - column:
+                  name: authority
+                  value: USER

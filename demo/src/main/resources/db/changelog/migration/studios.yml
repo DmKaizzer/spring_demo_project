@@ -1,0 +1,65 @@
+databaseChangeLog:
+  - changeSet:
+      id: _1st
+      author: YDmitriY
+      changes:
+        - createTable:
+            tableName: studios
+            columns:
+              - column:
+                  name: studio_id
+                  type: bigint
+              - column:
+                  name: title
+                  type: varchar(100)
+              - column:
+                  name: address
+                  type: varchar(255)
+  - changeSet:
+      id: _2st
+      author: YDmitriY
+      changes:
+        - addPrimaryKey:
+            tableName: studios
+            columnNames: studio_id
+            constraintName: studios_pk
+  - changeSet:
+      id: _3st
+      author: YDmitriy
+      changes:
+        - insert:
+            tableName: studios
+            columns:
+              - column:
+                  name: studio_id
+                  value: 1
+              - column:
+                  name: title
+                  value: First
+              - column:
+                  name: address
+                  value: FirstStr
+        - insert:
+            tableName: studios
+            columns:
+              - column:
+                  name: studio_id
+                  value: 2
+              - column:
+                  name: title
+                  value: Second
+              - column:
+                  name: address
+                  value: SecondStr
+        - insert:
+            tableName: studios
+            columns:
+              - column:
+                  name: studio_id
+                  value: 3
+              - column:
+                  name: title
+                  value: Third
+              - column:
+                  name: address
+                  value: ThirdStr

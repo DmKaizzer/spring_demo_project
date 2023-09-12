@@ -41,7 +41,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                 (authorize) -> authorize
                         .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.ERROR).permitAll()
-                        .requestMatchers("/admin").hasAuthority("ADMIN")
+                        .requestMatchers("/**").hasAuthority("ADMIN")
                         .requestMatchers("/user").hasAuthority("USER")
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())

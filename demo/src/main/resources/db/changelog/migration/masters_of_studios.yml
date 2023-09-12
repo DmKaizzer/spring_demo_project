@@ -1,0 +1,74 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1mos_
+      author: YDmitriY
+      changes:
+        - createTable:
+            tableName: masters_of_studios
+            columns:
+              - column:
+                  name: studio_id
+                  type: bigint
+              - column:
+                  name: login
+                  type: varchar
+  - changeSet:
+      id: 2mos_
+      author: YDmitriY
+      changes:
+        - addPrimaryKey:
+            tableName: masters_of_studios
+            columnNames: studio_id, login
+            constraintName: masters_of_studios_pk
+        - addForeignKeyConstraint:
+            constraintName: master_fk
+            baseTableName: masters_of_studios
+            baseColumnNames: login
+            referencedTableName: masters
+            referencedColumnNames: login
+            onDelete: CASCADE
+            onUpdate: CASCADE
+
+  - changeSet:
+      id: 4mos_
+      author: YDmitriy
+      changes:
+        - insert:
+            tableName: masters_of_studios
+            columns:
+              - column:
+                  name: studio_id
+                  value: 1
+              - column:
+                  name: login
+                  value: first_login
+        - insert:
+            tableName: masters_of_studios
+            columns:
+              - column:
+                  name: studio_id
+                  value: 2
+              - column:
+                  name: login
+                  value: second_login
+        - insert:
+            tableName: masters_of_studios
+            columns:
+              - column:
+                  name: studio_id
+                  value: 3
+              - column:
+                  name: login
+                  value: third_login
+  - changeSet:
+      id: _3mos_
+      author: YDmitriY
+      changes:
+        - addForeignKeyConstraint:
+            constraintName: studio_fk
+            baseTableName: masters_of_studios
+            baseColumnNames: studio_id
+            referencedTableName: studios
+            referencedColumnNames: studio_id
+            onDelete: CASCADE
+            onUpdate: CASCADE
