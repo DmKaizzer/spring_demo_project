@@ -19,8 +19,8 @@ databaseChangeLog:
                   name: last_name
                   type: varchar(50)
               - column:
-                  name: master_login
-                  type: varchar
+                  name: master_id
+                  type: bigint
   - changeSet:
       id: 113cl-
       author: YDmitriy
@@ -40,9 +40,9 @@ databaseChangeLog:
         - addForeignKeyConstraint:
             constraintName: client_fk
             baseTableName: clients
-            baseColumnNames: master_login
+            baseColumnNames: master_id
             referencedTableName: masters
-            referencedColumnNames: login
+            referencedColumnNames: id
             onDelete: CASCADE
             onUpdate: CASCADE
   - changeSet:
@@ -90,8 +90,8 @@ databaseChangeLog:
                   name: last_name
                   value: first_last_name
               - column:
-                  name: master_login
-                  value: first_login
+                  name: master_id
+                  value: 1
         - insert:
             tableName: clients
             columns:
@@ -111,8 +111,8 @@ databaseChangeLog:
                   name: last_name
                   value: second_last_name
               - column:
-                  name: master_login
-                  value: second_login
+                  name: master_id
+                  value: 2
         - insert:
             tableName: clients
             columns:
@@ -132,5 +132,5 @@ databaseChangeLog:
                   name: last_name
                   value: third_last_name
               - column:
-                  name: master_login
-                  value: third_login
+                  name: master_id
+                  value: 3

@@ -3,6 +3,8 @@ package com.example.demo.dao;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.io.Serializable;
+
 
 @Entity
 @Table(name = "users")
@@ -35,11 +37,6 @@ public class User {
     @Column(name = "is_deleted")
     private Boolean isDeleted;
 
-
-    @Override
-    public int hashCode() {
-        return 1;
-    }
 
     @Override
     public String toString() {

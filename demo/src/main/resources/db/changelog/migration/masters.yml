@@ -7,6 +7,13 @@ databaseChangeLog:
             tableName: masters
             columns:
               - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
                   name: login
                   type: varchar
               - column:
@@ -29,14 +36,6 @@ databaseChangeLog:
             constraintName: not_null_login
             tableName: masters
             columnName: login
-  - changeSet:
-      id: _2ma
-      author: YDmitriY
-      changes:
-        - addPrimaryKey:
-            tableName: masters
-            columnNames: login
-            constraintName: masters_pk
   - changeSet:
       id: _3ma
       author: YDmitriY

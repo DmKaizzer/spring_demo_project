@@ -7,15 +7,18 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "mastres")
+@Table(name = "masters")
 @Data
 public class Master {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "login", referencedColumnName = "username")
     private User login;
 
-    @Id
     @Column
     private String name;
 
@@ -30,6 +33,11 @@ public class Master {
 
     @ManyToMany(mappedBy = "masters")
     private List<Studio> studios;
+
+    @Override
+    public String toString() {
+        return "test";
+    }
 }
 
 

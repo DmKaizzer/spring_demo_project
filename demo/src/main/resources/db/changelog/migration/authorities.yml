@@ -7,6 +7,13 @@ databaseChangeLog:
           tableName: authorities
           columns:
             - column:
+                name: id
+                type: bigint
+                autoIncrement: true
+                constraints:
+                  primaryKey: true
+                  nullable: false
+            - column:
                 name: username
                 type: varchar
             - column:
@@ -63,15 +70,6 @@ databaseChangeLog:
             constraintName: not_null_authority
             tableName: authorities
             columnName: authority
-  - changeSet:
-      id: 111y_
-      author: YDmitriy
-      changes:
-        - addPrimaryKey:
-            tableName: authorities
-            constraintName: auth_pk
-            columnNames: username, authority
-
   - changeSet:
       id: 113auth_
       author: YDmitriy

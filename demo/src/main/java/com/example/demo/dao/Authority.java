@@ -9,7 +9,7 @@ import lombok.Data;
 public class Authority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(updatable = false)
+    @Column(updatable = false, nullable = false)
     private Integer id;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -18,5 +18,11 @@ public class Authority {
 
     @Column
     private String authority;
+
+    @Override
+    public String toString() {
+        return "test";
+    }
+
 
 }

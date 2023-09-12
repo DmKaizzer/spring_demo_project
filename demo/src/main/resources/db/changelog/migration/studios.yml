@@ -7,29 +7,18 @@ databaseChangeLog:
             tableName: studios
             columns:
               - column:
-                  name: studio_id
-                  type: bigint
-              - column:
                   name: title
                   type: varchar(100)
               - column:
                   name: address
                   type: varchar(255)
   - changeSet:
-      id: 113st-
-      author: YDmitriy
-      changes:
-        - addNotNullConstraint:
-            constraintName: not_null_studio_id
-            tableName: studios
-            columnName: studio_id
-  - changeSet:
       id: _2st
       author: YDmitriY
       changes:
         - addPrimaryKey:
             tableName: studios
-            columnNames: studio_id
+            columnNames: title, address
             constraintName: studios_pk
   - changeSet:
       id: _3st
@@ -38,9 +27,6 @@ databaseChangeLog:
         - insert:
             tableName: studios
             columns:
-              - column:
-                  name: studio_id
-                  value: 1
               - column:
                   name: title
                   value: First
@@ -51,9 +37,6 @@ databaseChangeLog:
             tableName: studios
             columns:
               - column:
-                  name: studio_id
-                  value: 2
-              - column:
                   name: title
                   value: Second
               - column:
@@ -62,9 +45,6 @@ databaseChangeLog:
         - insert:
             tableName: studios
             columns:
-              - column:
-                  name: studio_id
-                  value: 3
               - column:
                   name: title
                   value: Third

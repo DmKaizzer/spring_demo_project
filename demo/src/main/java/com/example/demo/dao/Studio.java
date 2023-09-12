@@ -9,20 +9,21 @@ import java.util.List;
 @Table(name = "studios")
 @Data
 public class Studio {
-    @Id
-    @Column(name = "studio_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @Column(name = "title")
-    private String title;
-
-    @Column
-    private String address;
+    @EmbeddedId
+    private StudioIdentification studioId;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "masters_of_studios",
-        joinColumns = @JoinColumn(name = "studio_id"),
-        inverseJoinColumns = @JoinColumn(name = "login"))
+            joinColumns = {
+                    @JoinColumn(table = "studios", name = "studio_address", referencedColumnName = "address"),
+                    @JoinColumn(table = "studios", name = "studio_title", referencedColumnName = "title")
+            },
+            inverseJoinColumns = @JoinColumn(table = "masters", name = "master_id", referencedColumnName = "id"))
     private List<Master> masters;
+
+    @Override
+    public String toString() {
+        return "test";
+    }
 }

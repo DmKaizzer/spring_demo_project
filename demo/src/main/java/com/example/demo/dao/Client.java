@@ -10,11 +10,12 @@ public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cleint_id", nullable = false, updatable = false)
+    @Column(name = "client_id", nullable = false, updatable = false)
     private Long clientId;
 
+    //TODO: таблица не создана
     @OneToOne
-    @JoinColumn(name = "login", referencedColumnName = "username")
+    @JoinColumn(name = "username", referencedColumnName = "id")
     private User username;
 
     @Column
@@ -27,8 +28,11 @@ public class Client {
     private String lastName;
 
     @ManyToOne
-    @JoinColumn(name = "master_login", referencedColumnName = "login")
+    @JoinColumn(name = "master_id", referencedColumnName = "id")
     private Master master;
 
-
+    @Override
+    public String toString() {
+        return "test";
+    }
 }
