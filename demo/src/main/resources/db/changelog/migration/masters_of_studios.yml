@@ -13,6 +13,22 @@ databaseChangeLog:
                   name: login
                   type: varchar
   - changeSet:
+      id: 113mos-
+      author: YDmitriy
+      changes:
+        - addNotNullConstraint:
+            constraintName: not_null_studio_id
+            tableName: masters_of_studios
+            columnName: studio_id
+  - changeSet:
+      id: 118mos-
+      author: YDmitriy
+      changes:
+        - addNotNullConstraint:
+            constraintName: not_null_login
+            tableName: masters_of_studios
+            columnName: login
+  - changeSet:
       id: 2mos_
       author: YDmitriY
       changes:

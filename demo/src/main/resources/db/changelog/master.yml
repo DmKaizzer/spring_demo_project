@@ -6,8 +6,8 @@ databaseChangeLog:
   - include:
       file: db\changelog\migration\masters.yml
   - include:
-      file: db\changelog\migration\masters_of_studios.yml
-  - include:
       file: db\changelog\migration\client.yml
   - include:
       file: db\changelog\migration\studios.yml
+  - include:
+      file: db\changelog\migration\masters_of_studios.yml

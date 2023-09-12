@@ -22,6 +22,14 @@ databaseChangeLog:
                   name: master_login
                   type: varchar
   - changeSet:
+      id: 113cl-
+      author: YDmitriy
+      changes:
+        - addNotNullConstraint:
+            constraintName: not_null_client_id
+            tableName: clients
+            columnName: client_id
+  - changeSet:
       id: 2cl_-
       author: YDmitriY
       changes:
@@ -52,7 +60,7 @@ databaseChangeLog:
       author: YDmitriY
       changes:
         - addForeignKeyConstraint:
-            constraintName: username_fk
+            constraintName: client_username_fk
             baseTableName: clients
             baseColumnNames: login
             referencedTableName: users

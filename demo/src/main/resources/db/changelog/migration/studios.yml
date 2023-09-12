@@ -16,6 +16,14 @@ databaseChangeLog:
                   name: address
                   type: varchar(255)
   - changeSet:
+      id: 113st-
+      author: YDmitriy
+      changes:
+        - addNotNullConstraint:
+            constraintName: not_null_studio_id
+            tableName: studios
+            columnName: studio_id
+  - changeSet:
       id: _2st
       author: YDmitriY
       changes:

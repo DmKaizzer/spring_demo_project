@@ -22,6 +22,14 @@ databaseChangeLog:
                   name: style
                   type: varchar(50)
   - changeSet:
+      id: 113ma-
+      author: YDmitriy
+      changes:
+        - addNotNullConstraint:
+            constraintName: not_null_login
+            tableName: masters
+            columnName: login
+  - changeSet:
       id: _2ma
       author: YDmitriY
       changes:
@@ -34,7 +42,7 @@ databaseChangeLog:
       author: YDmitriY
       changes:
         - addForeignKeyConstraint:
-            constraintName: username_fk
+            constraintName: masters_username_fk
             baseTableName: masters
             baseColumnNames: login
             referencedTableName: users

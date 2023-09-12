@@ -42,11 +42,27 @@ databaseChangeLog:
         - addForeignKeyConstraint:
             baseColumnNames: username
             baseTableName: authorities
-            constraintName: username_fk
+            constraintName: authorities_username_fk
             onDelete: CASCADE
             onUpdate: CASCADE
             referencedColumnNames: username
             referencedTableName: users
+  - changeSet:
+      id: 113y_
+      author: YDmitriy
+      changes:
+        - addNotNullConstraint:
+            constraintName: not_null_username
+            tableName: authorities
+            columnName: username
+  - changeSet:
+      id: 113y_-
+      author: YDmitriy
+      changes:
+        - addNotNullConstraint:
+            constraintName: not_null_authority
+            tableName: authorities
+            columnName: authority
   - changeSet:
       id: 111y_
       author: YDmitriy
