@@ -13,7 +13,6 @@ public class Client {
     @Column(name = "client_id", nullable = false, updatable = false)
     private Long clientId;
 
-    //TODO: таблица не создана
     @OneToOne
     @JoinColumn(name = "username", referencedColumnName = "id")
     private User username;
