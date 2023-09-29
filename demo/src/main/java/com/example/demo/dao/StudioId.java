@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Embeddable
 @Data
-public class StudioIdentification implements Serializable {
+public class StudioId implements Serializable {
     public String title;
     public String address;
 }

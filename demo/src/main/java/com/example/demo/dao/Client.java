@@ -14,7 +14,7 @@ public class Client {
     private Long clientId;
 
     @OneToOne
-    @JoinColumn(name = "username", referencedColumnName = "id")
+    @JoinColumn(name = "login", referencedColumnName = "username")
     private User username;
 
     @Column
@@ -29,9 +29,4 @@ public class Client {
     @ManyToOne
     @JoinColumn(name = "master_id", referencedColumnName = "id")
     private Master master;
-
-    @Override
-    public String toString() {
-        return "test";
-    }
 }

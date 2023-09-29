@@ -11,7 +11,7 @@ import java.util.List;
 public class Studio {
 
     @EmbeddedId
-    private StudioIdentification studioId;
+    private StudioId studioId;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "masters_of_studios",

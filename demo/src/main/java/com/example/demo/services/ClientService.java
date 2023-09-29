@@ -2,23 +2,44 @@ package com.example.demo.services;
 
 import com.example.demo.dao.Client;
 import com.example.demo.dao.Master;
+import com.example.demo.dto.ClientDTO;
+import com.example.demo.dto.MasterDTO;
 import com.example.demo.repository.ClientRepository;
 import com.example.demo.repository.MasterRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
+@Transactional
 public class ClientService {
-    ClientRepository clientRepository;
-    @Autowired
-    public ClientService (ClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
+
+    private final ClientRepository clientRepository;
+    private final MasterRepository masterRepository;
+
+    public List<MasterDTO> getAllMaster() {
+        return masterRepository.findAll().stream().map(MasterDTO::parseMaster).toList();
     }
 
-    public List<Client> getAll() {
-        return clientRepository.findAll();
+    public ClientDTO addMaster(Long clientId, Long masterId) {
+        Client client = clientRepository.findById(clientId).orElse(null);
+        Master master = masterRepository.findById(masterId).orElse(null);
+        if(client != null && master != null) {
+            client.setMaster(master);
+            clientRepository.save(client);
+        }
+        return ClientDTO.parseClient(client);
+    }
+
+    public ClientDTO removeMaster(Long clientId) {
+        Client client = clientRepository.findById(clientId).orElse(null);
+        if (client != null) {
+            client.setMaster(null);
+            clientRepository.save(client);
+        }
+        return ClientDTO.parseClient(client);
     }
 }

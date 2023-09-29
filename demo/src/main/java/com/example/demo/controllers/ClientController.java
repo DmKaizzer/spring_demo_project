@@ -1,23 +1,32 @@
 package com.example.demo.controllers;
 
-import com.example.demo.dao.Client;
+import com.example.demo.dto.ClientDTO;
+import com.example.demo.dto.MasterDTO;
 import com.example.demo.services.ClientService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/client")
+@RequiredArgsConstructor
 public class ClientController {
 
-    @Autowired
-    ClientService service;
+    private final ClientService service;
 
-    @GetMapping(value = "/get-all")
-    public List<Client> getTestData() {
-        return service.getAll();
+    @GetMapping(value = "/get-all-masters")
+    public List<MasterDTO> getTestData() {
+        return service.getAllMaster();
+    }
+
+    @PutMapping(value = "/{client_id}/{master_id}/add-master")
+    public ClientDTO addMaster(@PathVariable("client_id") Long clientId, @PathVariable("master_id") Long masterId) {
+        return service.addMaster(clientId, masterId);
+    }
+
+    @PutMapping(value = "/{client_id}/remove-master")
+    public ClientDTO removeMaster(@PathVariable("client_id") Long clientId) {
+        return service.removeMaster(clientId);
     }
 }

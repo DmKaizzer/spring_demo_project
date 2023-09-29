@@ -1,13 +1,8 @@
 package com.example.demo.controllers;
 
-import com.example.demo.dao.Client;
-import com.example.demo.dao.Master;
-import com.example.demo.repository.ClientRepository;
-import com.example.demo.repository.MasterRepository;
+import com.example.demo.dto.ClientDTO;
 import com.example.demo.services.MasterService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,16 +12,17 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/master")
+@RequiredArgsConstructor
 public class MasterController {
-/*
-* разобраться с таблицами
-* сервисы, тесты
-* */
-    @Autowired
-    MasterService service;
+    private final MasterService service;
 
-    @GetMapping(value = "/{login}/get-clients")
-    public List<Master> getClients(@PathVariable("login") String login) {
-        return service.getAllMasters();
+    @GetMapping(value = "/{id}/get-clients")
+    public List<ClientDTO> getClientsOfMaster(@PathVariable("id") Long id) {
+        return service.getAllMasters(id);
+    }
+
+    @GetMapping(value = "/get-all-clients")
+    public List<ClientDTO> getAllClients() {
+        return service.getAllClients();
     }
 }

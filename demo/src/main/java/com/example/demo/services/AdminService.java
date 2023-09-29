@@ -3,28 +3,28 @@ package com.example.demo.services;
 import com.example.demo.dao.Authority;
 import com.example.demo.dao.User;
 import com.example.demo.dto.AuthorityDTO;
+import com.example.demo.dto.UserDTO;
 import com.example.demo.repository.AuthorityRepository;
 import com.example.demo.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
+@Transactional
 public class AdminService {
-    @Autowired
-    UserRepository userRepository;
-    @Autowired
-    AuthorityRepository authorityRepository;
-    @Autowired
-    PasswordEncoder encoder;
 
-    public List<User> getAllUsers() {
-        List<User> users = userRepository.findAll();
-        return users.size() != 0 ? users : new ArrayList<>();
+    private final UserRepository userRepository;
+    private final AuthorityRepository authorityRepository;
+    private final PasswordEncoder encoder;
+
+    public List<UserDTO> getAllUsers() {
+        return userRepository.findAll().stream().map(UserDTO::parseUser).toList();
     }
 
     public User createUser(User user) {
@@ -33,51 +33,37 @@ public class AdminService {
         return user;
     }
 
-    public User updateUser(User user) {
-        Optional<User> findingUser = userRepository.findById(user.getId());
-        if (findingUser.isPresent()) {
-            User newUser = findingUser.get();
-            newUser.setEmail(user.getEmail());
-            newUser.setEnabled(user.getEnabled());
-            newUser.setUsername(user.getUsername());
-            newUser.setPassword(user.getPassword());
-            newUser.setPriority(user.getPriority());
-            newUser.setLastActivity(user.getLastActivity());
-            newUser = userRepository.save(newUser);
-            return newUser;
+    public UserDTO updateUser(UserDTO userDTO) {
+        User user = userRepository.findById(userDTO.getId()).orElse(null);
+        if (user != null) {
+            userDTO = UserDTO.parseUser(user);
         }
-        return null;
+        return userDTO;
     }
 
-    public User softDeleteUser(Integer id) {
-        Optional<User> user = userRepository.findById(id);
-        if (user.isPresent()) {
-            User deletingUser = user.get();
-            deletingUser.setIsDeleted(deletingUser.getIsDeleted() == null || !deletingUser.getIsDeleted());
-            deletingUser = userRepository.save(deletingUser);
-            return deletingUser;
+    public UserDTO softDeleteUser(Integer id) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user != null) {
+            user.setIsDeleted(user.getIsDeleted() == null || !user.getIsDeleted());
+            userRepository.save(user);
         }
-        return null;
+        return UserDTO.parseUser(user);
     }
 
     public void deleteUser(Integer id) {
-        Optional<User> user = userRepository.findById(id);
-        if (user.isPresent()) {
-            userRepository.deleteById(id);
-        }
+        userRepository.findById(id).ifPresent(user -> userRepository.deleteById(id));
     }
 
-    public Authority addAuthority(AuthorityDTO authorityDTO) {
+    public AuthorityDTO addAuthority(AuthorityDTO authorityDTO) {
         User user = userRepository.findUserByUsername(authorityDTO.getUsername());
         Authority authority = new Authority();
         authority.setAuthority(authorityDTO.getAuthority());
         authority.setUsername(user);
-        authority = authorityRepository.save(authority);
-        return authority;
+        authorityRepository.save(authority);
+        return AuthorityDTO.parseAuthorityDTO(authority);
     }
 
-    public List<Authority> getAuthority() {
-        List<Authority> authorities = authorityRepository.findAll();
-        return authorities.size() != 0 ? authorities : new ArrayList<>();
+    public List<AuthorityDTO> getAuthority() {
+        return authorityRepository.findAll().stream().map(AuthorityDTO::parseAuthorityDTO).toList();
     }
 }

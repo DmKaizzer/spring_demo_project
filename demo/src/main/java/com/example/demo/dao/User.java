@@ -3,7 +3,6 @@ package com.example.demo.dao;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.io.Serializable;
 
 
 @Entity
@@ -36,13 +35,4 @@ public class User {
 
     @Column(name = "is_deleted")
     private Boolean isDeleted;
-
-
-    @Override
-    public String toString() {
-        return "id: " +
-                "login: " +
-                "password: ";
-    }
-
 }

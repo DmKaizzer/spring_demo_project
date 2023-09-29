@@ -1,9 +1,10 @@
 package com.example.demo.controllers;
 
-import com.example.demo.dao.Authority;
 import com.example.demo.dao.User;
 import com.example.demo.dto.AuthorityDTO;
+import com.example.demo.dto.UserDTO;
 import com.example.demo.services.AdminService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,13 +12,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
+@RequiredArgsConstructor
 public class AdminController {
 
-    @Autowired
-    AdminService service;
+    private final AdminService service;
 
     @GetMapping(value = "/get-all-users")
-    public List<User> getAllUsers() {
+    public List<UserDTO> getAllUsers() {
         return service.getAllUsers();
     }
 
@@ -27,12 +28,12 @@ public class AdminController {
     }
 
     @PutMapping(value = "/update-user")
-    public User updateUser(@RequestBody User user) {
+    public UserDTO updateUser(@RequestBody UserDTO user) {
         return service.updateUser(user);
     }
 
     @PostMapping("/soft-delete-user/{id}")
-    public User softDeleteUser(@PathVariable("id") Integer id) {
+    public UserDTO softDeleteUser(@PathVariable("id") Integer id) {
         return service.softDeleteUser(id);
     }
 
@@ -42,12 +43,12 @@ public class AdminController {
     }
 
     @PostMapping(value = "/add_authority")
-    public Authority addAuthority(@RequestBody AuthorityDTO authorityDTO) {
+    public AuthorityDTO addAuthority(@RequestBody AuthorityDTO authorityDTO) {
         return service.addAuthority(authorityDTO);
     }
 
     @GetMapping(value = "/get_authority")
-    public List<Authority> getAuthority() {
+    public List<AuthorityDTO> getAuthority() {
         return service.getAuthority();
     }
 }
