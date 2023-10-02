@@ -28,4 +28,19 @@ public class UserDTO {
         }
         return userDTO;
     }
+
+    public static User parseUserDto(UserDTO userDTO) {
+        User user = new User();
+        if (userDTO != null) {
+            user.setId(userDTO.getId());
+            user.setUsername(userDTO.getUsername());
+            user.setPassword(userDTO.getPassword());
+            user.setEnabled(userDTO.getEnabled());
+            user.setEmail(userDTO.getEmail());
+            user.setLastActivity(userDTO.getLastActivity());
+            user.setPriority(userDTO.getPriority());
+            user.setIsDeleted(userDTO.getIsDeleted());
+        }
+        return user;
+    }
 }

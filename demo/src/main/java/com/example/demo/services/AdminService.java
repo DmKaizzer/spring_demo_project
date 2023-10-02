@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,18 +26,20 @@ public class AdminService {
         return userRepository.findAll().stream().map(UserDTO::parseUser).toList();
     }
 
-    public User createUser(User user) {
+    public User createUser(UserDTO userDTO) {
+        User user = UserDTO.parseUserDto(userDTO);
         user.setPassword(encoder.encode(user.getPassword()));
-        user = userRepository.save(user);
+        userRepository.save(user);
         return user;
     }
 
-    public UserDTO updateUser(UserDTO userDTO) {
+    public User updateUser(UserDTO userDTO) {
         User user = userRepository.findById(userDTO.getId()).orElse(null);
         if (user != null) {
-            userDTO = UserDTO.parseUser(user);
+            user = UserDTO.parseUserDto(userDTO);
+            userRepository.save(user);
         }
-        return userDTO;
+        return user;
     }
 
     public UserDTO softDeleteUser(Integer id) {

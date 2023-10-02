@@ -23,12 +23,12 @@ public class AdminController {
     }
 
     @PostMapping(value = "/create-user")
-    public User createUser(@RequestBody User user) {
-        return service.createUser(user);
+    public User createUser(@RequestBody UserDTO userDTO) {
+        return service.createUser(userDTO);
     }
 
     @PutMapping(value = "/update-user")
-    public UserDTO updateUser(@RequestBody UserDTO user) {
+    public User updateUser(@RequestBody UserDTO user) {
         return service.updateUser(user);
     }
 

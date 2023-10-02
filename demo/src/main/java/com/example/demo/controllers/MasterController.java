@@ -18,7 +18,7 @@ public class MasterController {
 
     @GetMapping(value = "/{id}/get-clients")
     public List<ClientDTO> getClientsOfMaster(@PathVariable("id") Long id) {
-        return service.getAllMasters(id);
+        return service.getAllClientsByMasterId(id);
     }
 
     @GetMapping(value = "/get-all-clients")

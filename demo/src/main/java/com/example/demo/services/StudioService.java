@@ -36,7 +36,7 @@ public class StudioService {
         Studio studio = studioRepository.findById(id).orElse(null);
         Master master = masterRepository.findById(masterId).orElse(null);
         if (studio != null && master != null) {
-            List<Master> studioMasters = new ArrayList<>(studio.getMasters());
+            List<Master> studioMasters = studio.getMasters() != null ? new ArrayList<>(studio.getMasters()) : new ArrayList<>();
             studioMasters.add(master);
             studio.setMasters(studioMasters);
             studioRepository.save(studio);

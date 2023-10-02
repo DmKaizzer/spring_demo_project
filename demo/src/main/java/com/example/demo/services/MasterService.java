@@ -18,7 +18,7 @@ public class MasterService {
     private final MasterRepository masterRepository;
     private final ClientRepository clientRepository;
 
-    public List<ClientDTO> getAllMasters(Long masterId) {
+    public List<ClientDTO> getAllClientsByMasterId(Long masterId) {
         Master master = masterRepository.findById(masterId).orElse(null);
         return clientRepository.findClientByMaster(master).stream().map(ClientDTO::parseClient).toList();
     }
