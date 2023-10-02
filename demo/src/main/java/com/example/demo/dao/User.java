@@ -1,10 +1,8 @@
 package com.example.demo.dao;
 
+import jakarta.persistence.*;
 import lombok.Data;
 
-import jakarta.persistence.*;
-
-import java.util.Date;
 
 
 @Entity
@@ -14,35 +12,27 @@ public class User {
     //TODO: почему плохо генерировать ламбуком хэшкод и иквалс
     //TODO: outer join
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
-    private String id;
+    private Integer id;
 
-    @Column
-    private String login;
+    private String username;
 
     @Column
     private String password;
 
     @Column
-    private String enabled;
+    private Boolean enabled;
 
     @Column
     private String email;
 
+    @Column(name = "last_activity")
+    private String lastActivity;
+
     @Column
-    private Date lastActivity;
+    private Integer priority;
 
-    @Override
-    public int hashCode() {
-        return 1;
-    }
-
-    @Override
-    public String toString() {
-        return "id: " +
-                "login: " +
-                "password: ";
-    }
-
+    @Column(name = "is_deleted")
+    private Boolean isDeleted;
 }

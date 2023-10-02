@@ -1,0 +1,110 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1mos_
+      author: YDmitriY
+      changes:
+        - createTable:
+            tableName: masters_of_studios
+            columns:
+              - column:
+                  name: studio_title
+                  type: varchar
+              - column:
+                  name: studio_address
+                  type: varchar
+              - column:
+                  name: master_id
+                  type: bigint
+  - changeSet:
+      id: 113mos-
+      author: YDmitriy
+      changes:
+        - addNotNullConstraint:
+            constraintName: not_null_studio_title
+            tableName: masters_of_studios
+            columnName: studio_title
+  - changeSet:
+      id: 119mos-
+      author: YDmitriy
+      changes:
+        - addNotNullConstraint:
+            constraintName: not_null_studio_address
+            tableName: masters_of_studios
+            columnName: studio_address
+  - changeSet:
+      id: 118mos-
+      author: YDmitriy
+      changes:
+        - addNotNullConstraint:
+            constraintName: not_null_login
+            tableName: masters_of_studios
+            columnName: master_id
+  - changeSet:
+      id: 2mos_
+      author: YDmitriY
+      changes:
+        - addPrimaryKey:
+            tableName: masters_of_studios
+            columnNames: studio_title, studio_address, master_id
+            constraintName: masters_of_studios_pk
+        - addForeignKeyConstraint:
+            constraintName: master_fk
+            baseTableName: masters_of_studios
+            baseColumnNames: master_id
+            referencedTableName: masters
+            referencedColumnNames: id
+            onDelete: CASCADE
+            onUpdate: CASCADE
+
+  - changeSet:
+      id: 4mos_
+      author: YDmitriy
+      changes:
+        - insert:
+            tableName: masters_of_studios
+            columns:
+              - column:
+                  name: studio_title
+                  value: First
+              - column:
+                  name: studio_address
+                  value: FirstStr
+              - column:
+                  name: master_id
+                  value: 1
+        - insert:
+            tableName: masters_of_studios
+            columns:
+              - column:
+                  name: studio_title
+                  value: Second
+              - column:
+                  name: studio_address
+                  value: SecondStr
+              - column:
+                  name: master_id
+                  value: 2
+        - insert:
+            tableName: masters_of_studios
+            columns:
+              - column:
+                  name: studio_title
+                  value: Third
+              - column:
+                  name: studio_address
+                  value: ThirdStr
+              - column:
+                  name: master_id
+                  value: 3
+  - changeSet:
+      id: _3mos_
+      author: YDmitriY
+      changes:
+        - addForeignKeyConstraint:
+            constraintName: studio_fk
+            baseTableName: masters_of_studios
+            baseColumnNames: studio_title, studio_address
+            referencedTableName: studios
+            referencedColumnNames: title, address
+            onDelete: CASCADE
+            onUpdate: CASCADE

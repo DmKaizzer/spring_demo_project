@@ -1,0 +1,108 @@
+databaseChangeLog:
+  - changeSet:
+      id: _1ma
+      author: YDmitriY
+      changes:
+        - createTable:
+            tableName: masters
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: login
+                  type: varchar
+              - column:
+                  name: name
+                  type: varchar(20)
+              - column:
+                  name: last_name
+                  type: varchar(20)
+              - column:
+                  name: skill
+                  type: varchar(50)
+              - column:
+                  name: style
+                  type: varchar(50)
+  - changeSet:
+      id: 113ma-
+      author: YDmitriy
+      changes:
+        - addNotNullConstraint:
+            constraintName: not_null_login
+            tableName: masters
+            columnName: login
+  - changeSet:
+      id: _3ma
+      author: YDmitriY
+      changes:
+        - addForeignKeyConstraint:
+            constraintName: masters_username_fk
+            baseTableName: masters
+            baseColumnNames: login
+            referencedTableName: users
+            referencedColumnNames: username
+            onDelete: CASCADE
+            onUpdate: CASCADE
+  - changeSet:
+      id: _4ma
+      author: YDmitriy
+      changes:
+        - insert:
+            tableName: masters
+            columns:
+              - column:
+                  name: login
+                  value: first_login
+              - column:
+                  name: name
+                  value: first_name
+              - column:
+                  name: last_name
+                  value: first_last_name
+              - column:
+                  name: skill
+                  value: first_skill
+              - column:
+                  name: style
+                  value: first_style
+        - insert:
+            tableName: masters
+            columns:
+              - column:
+                  name: login
+                  value: second_login
+              - column:
+                  name: name
+                  value: second_name
+              - column:
+                  name: last_name
+                  value: second_last_name
+              - column:
+                  name: skill
+                  value: second_skill
+              - column:
+                  name: style
+                  value: second_style
+        - insert:
+            tableName: masters
+            columns:
+              - column:
+                  name: login
+                  value: third_login
+              - column:
+                  name: name
+                  value: third_name
+              - column:
+                  name: last_name
+                  value: third_last_name
+              - column:
+                  name: skill
+                  value: third_skill
+              - column:
+                  name: style
+                  value: third_style

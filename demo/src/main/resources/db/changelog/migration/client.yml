@@ -1,0 +1,136 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1cl_-
+      author: YDmitriY
+      changes:
+        - createTable:
+            tableName: clients
+            columns:
+              - column:
+                  name: client_id
+                  type: bigint
+              - column:
+                  name: age
+                  type: int
+              - column:
+                  name: name
+                  type: varchar(20)
+              - column:
+                  name: last_name
+                  type: varchar(50)
+              - column:
+                  name: master_id
+                  type: bigint
+  - changeSet:
+      id: 113cl-
+      author: YDmitriy
+      changes:
+        - addNotNullConstraint:
+            constraintName: not_null_client_id
+            tableName: clients
+            columnName: client_id
+  - changeSet:
+      id: 2cl_-
+      author: YDmitriY
+      changes:
+        - addPrimaryKey:
+            tableName: clients
+            columnNames: client_id
+            constraintName: client_pk
+        - addForeignKeyConstraint:
+            constraintName: client_fk
+            baseTableName: clients
+            baseColumnNames: master_id
+            referencedTableName: masters
+            referencedColumnNames: id
+            onDelete: CASCADE
+            onUpdate: CASCADE
+  - changeSet:
+      id: 5cl_-
+      author: YDmitriy
+      changes:
+        - addColumn:
+            tableName: clients
+            columns:
+              - column:
+                  name: login
+                  type: varchar
+  - changeSet:
+      id: 3cl_-
+      author: YDmitriY
+      changes:
+        - addForeignKeyConstraint:
+            constraintName: client_username_fk
+            baseTableName: clients
+            baseColumnNames: login
+            referencedTableName: users
+            referencedColumnNames: username
+            onDelete: CASCADE
+            onUpdate: CASCADE
+  - changeSet:
+      id: 4cl_-
+      author: YDmitriy
+      changes:
+        - insert:
+            tableName: clients
+            columns:
+              - column:
+                  name: client_id
+                  value: 1
+              - column:
+                  name: age
+                  value: 19
+              - column:
+                  name: name
+                  value: first_client
+              - column:
+                  name: login
+                  value: first_client_login
+              - column:
+                  name: last_name
+                  value: first_last_name
+              - column:
+                  name: master_id
+                  value: 1
+        - insert:
+            tableName: clients
+            columns:
+              - column:
+                  name: client_id
+                  value: 2
+              - column:
+                  name: age
+                  value: 19
+              - column:
+                  name: name
+                  value: second_client
+              - column:
+                  name: login
+                  value: second_client_login
+              - column:
+                  name: last_name
+                  value: second_last_name
+              - column:
+                  name: master_id
+                  value: 2
+        - insert:
+            tableName: clients
+            columns:
+              - column:
+                  name: client_id
+                  value: 3
+              - column:
+                  name: age
+                  value: 21
+              - column:
+                  name: name
+                  value: third_client
+              - column:
+                  name: login
+                  value: third_client_login
+              - column:
+                  name: last_name
+                  value: third_last_name
+              - column:
+                  name: master_id
+                  value: 3

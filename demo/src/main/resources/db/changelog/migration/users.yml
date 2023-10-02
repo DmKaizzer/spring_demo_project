@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 100
+      id: _100y
       author: YDmitriY
       changes:
       - createTable:
@@ -26,7 +26,7 @@ databaseChangeLog:
                 type: int
 
   - changeSet:
-      id: 101
+      id: _101y
       author: YDmitriy
       changes:
       - insert:
@@ -92,3 +92,165 @@ databaseChangeLog:
             - column:
                 name: priority
                 value: 5
+
+  - changeSet:
+      id: _105y
+      author: YDmitriy
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+  - changeSet:
+      id: _104y
+      author: YDmitriy
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: is_deleted
+                  type: boolean
+  - changeSet:
+      id: _107y
+      author: YDmitriy
+      changes:
+        - addUniqueConstraint:
+            tableName: users
+            columnNames: username
+  - changeSet:
+      id: _114auth
+      author: YDmitriy
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: first_login
+              - column:
+                  name: password
+                  value: $2a$12$OonFA/O66L0JQD7ikz2yVu9MWb8lYhUANbxQHNr3OH04eDx1cle7G
+              - column:
+                  name: enabled
+                  value: true
+              - column:
+                  name: email
+                  value: user@mail.com
+              - column:
+                  name: last_activity
+                  value: 2023-08-05 18:47:52.690
+              - column:
+                  name: priority
+                  value: 3
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: second_login
+              - column:
+                  name: password
+                  value: $2a$12$OonFA/O66L0JQD7ikz2yVu9MWb8lYhUANbxQHNr3OH04eDx1cle7G
+              - column:
+                  name: enabled
+                  value: true
+              - column:
+                  name: email
+                  value: user@mail.com
+              - column:
+                  name: last_activity
+                  value: 2023-08-05 18:47:52.690
+              - column:
+                  name: priority
+                  value: 3
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: third_login
+              - column:
+                  name: password
+                  value: $2a$12$OonFA/O66L0JQD7ikz2yVu9MWb8lYhUANbxQHNr3OH04eDx1cle7G
+              - column:
+                  name: enabled
+                  value: true
+              - column:
+                  name: email
+                  value: user@mail.com
+              - column:
+                  name: last_activity
+                  value: 2023-08-05 18:47:52.690
+              - column:
+                  name: priority
+                  value: 3
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: first_client_login
+              - column:
+                  name: password
+                  value: $2a$12$OonFA/O66L0JQD7ikz2yVu9MWb8lYhUANbxQHNr3OH04eDx1cle7G
+              - column:
+                  name: enabled
+                  value: true
+              - column:
+                  name: email
+                  value: user@mail.com
+              - column:
+                  name: last_activity
+                  value: 2023-08-05 18:47:52.690
+              - column:
+                  name: priority
+                  value: 3
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: second_client_login
+              - column:
+                  name: password
+                  value: $2a$12$OonFA/O66L0JQD7ikz2yVu9MWb8lYhUANbxQHNr3OH04eDx1cle7G
+              - column:
+                  name: enabled
+                  value: true
+              - column:
+                  name: email
+                  value: user@mail.com
+              - column:
+                  name: last_activity
+                  value: 2023-08-05 18:47:52.690
+              - column:
+                  name: priority
+                  value: 3
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: third_client_login
+              - column:
+                  name: password
+                  value: $2a$12$OonFA/O66L0JQD7ikz2yVu9MWb8lYhUANbxQHNr3OH04eDx1cle7G
+              - column:
+                  name: enabled
+                  value: true
+              - column:
+                  name: email
+                  value: user@mail.com
+              - column:
+                  name: last_activity
+                  value: 2023-08-05 18:47:52.690
+              - column:
+                  name: priority
+                  value: 3

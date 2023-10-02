@@ -1,24 +1,54 @@
 package com.example.demo.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.demo.dao.User;
+import com.example.demo.dto.AuthorityDTO;
+import com.example.demo.dto.UserDTO;
+import com.example.demo.services.AdminService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
+@RequestMapping("/admin")
+@RequiredArgsConstructor
 public class AdminController {
 
-    //TODO: таблицу с составным primary_key
+    private final AdminService service;
 
-    @GetMapping(value = "admin")
-    public String getTestData() {
-            Test test = new Test();
-            System.out.println(test.ttClass.test);
-            return "test admin data";
+    @GetMapping(value = "/get-all-users")
+    public List<UserDTO> getAllUsers() {
+        return service.getAllUsers();
     }
 
-    public class Test {
-        public TtClass ttClass;
+    @PostMapping(value = "/create-user")
+    public User createUser(@RequestBody UserDTO userDTO) {
+        return service.createUser(userDTO);
     }
-    public class TtClass {
-        public String test;
+
+    @PutMapping(value = "/update-user")
+    public User updateUser(@RequestBody UserDTO user) {
+        return service.updateUser(user);
+    }
+
+    @PostMapping("/soft-delete-user/{id}")
+    public UserDTO softDeleteUser(@PathVariable("id") Integer id) {
+        return service.softDeleteUser(id);
+    }
+
+    @DeleteMapping(value = "/delete-user/{id}")
+    public void deleteUser(@PathVariable("id") Integer id) {
+        service.deleteUser(id);
+    }
+
+    @PostMapping(value = "/add_authority")
+    public AuthorityDTO addAuthority(@RequestBody AuthorityDTO authorityDTO) {
+        return service.addAuthority(authorityDTO);
+    }
+
+    @GetMapping(value = "/get_authority")
+    public List<AuthorityDTO> getAuthority() {
+        return service.getAuthority();
     }
 }
