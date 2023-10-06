@@ -4,8 +4,9 @@ import com.example.demo.dao.User;
 import com.example.demo.dto.AuthorityDTO;
 import com.example.demo.dto.UserDTO;
 import com.example.demo.services.AdminService;
+import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.HashOperations;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,11 +16,22 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AdminController {
 
+    //redis; тесты переписать
+
     private final AdminService service;
+
+    @Resource(name = "redisTemplate")
+    private HashOperations<String, Integer, Object> hashOperations;
 
     @GetMapping(value = "/get-all-users")
     public List<UserDTO> getAllUsers() {
         return service.getAllUsers();
+    }
+
+    @GetMapping(value = "/get-user/{id}")
+    public UserDTO getUserById(@PathVariable(value = "id") Integer id) {
+        return service.getUserById(id);
+
     }
 
     @PostMapping(value = "/create-user")

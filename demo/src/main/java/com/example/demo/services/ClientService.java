@@ -8,6 +8,7 @@ import com.example.demo.repository.ClientRepository;
 import com.example.demo.repository.MasterRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class ClientService {
         return masterRepository.findAll().stream().map(MasterDTO::parseMaster).toList();
     }
 
+    @Cacheable(cacheNames = "masterId", key = "#masterId")
     public ClientDTO addMaster(Long clientId, Long masterId) {
         Client client = clientRepository.findById(clientId).orElse(null);
         Master master = masterRepository.findById(masterId).orElse(null);
@@ -34,6 +36,7 @@ public class ClientService {
         return ClientDTO.parseClient(client);
     }
 
+    @Cacheable(value = "client", key = "#clientId")
     public ClientDTO removeMaster(Long clientId) {
         Client client = clientRepository.findById(clientId).orElse(null);
         if (client != null) {

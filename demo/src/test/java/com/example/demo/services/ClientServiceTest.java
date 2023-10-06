@@ -6,19 +6,20 @@ import com.example.demo.dao.User;
 import com.example.demo.dto.ClientDTO;
 import com.example.demo.repository.ClientRepository;
 import com.example.demo.repository.MasterRepository;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-@RunWith(MockitoJUnitRunner.class)
-public class ClientServiceTest extends Assert {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@ExtendWith(MockitoExtension.class)
+public class ClientServiceTest {
 
     @InjectMocks
     ClientService clientService;
@@ -31,28 +32,36 @@ public class ClientServiceTest extends Assert {
     public Master master;
     public User user;
 
+    @BeforeEach
+    public void init() {
+        client = createClient();
+        master = createMaster();
+        user = createUser();
+    }
+
     @Test
     public void addMasterTest() {
-        Optional<Client> clientExp = Optional.of(client);
-        Optional<Master> masterExp = Optional.of(master);
+        Optional<Client> clientExp = Optional.of(createClient());
+        Optional<Master> masterExp = Optional.of(createMaster());
         Mockito.when(clientRepository.findById(client.getClientId())).thenReturn(clientExp);
         Mockito.when(masterRepository.findById(master.getId())).thenReturn(masterExp);
+        Client expectedClient = createClient();
+        expectedClient.setMaster(createMaster());
         ClientDTO clientDTO = clientService.addMaster(client.getClientId(), master.getId());
-        assertNotNull(clientDTO);
-        assertEquals(clientDTO.getMaster(), master.getName());
+        assertEquals(ClientDTO.parseClient(expectedClient), clientDTO);
     }
 
     @Test
     public void removeMasterTest() {
-        Optional<Client> clientExp = Optional.of(client);
+        Optional<Client> clientExp = Optional.of(createClient());
         Mockito.when(clientRepository.findById(client.getClientId())).thenReturn(clientExp);
+        client.setMaster(createMaster());
         ClientDTO clientDTO = clientService.removeMaster(client.getClientId());
-        assertNotNull(clientDTO);
-        assertNull(clientDTO.getMaster());
+        Client expectedClient = createClient();
+        assertEquals(ClientDTO.parseClient(expectedClient), clientDTO);
     }
 
-    @Before
-    public void createUser() {
+    public User createUser() {
         user = new User();
         user.setId(1);
         user.setUsername("Test");
@@ -62,9 +71,10 @@ public class ClientServiceTest extends Assert {
         user.setLastActivity("2023-12-12");
         user.setPriority(5);
         user.setIsDeleted(false);
+        return user;
     }
-    @Before
-    public void createMaster() {
+
+    public Master createMaster() {
         master = new Master();
         master.setId(1L);
         master.setLastName("TestMaster lastName");
@@ -73,10 +83,10 @@ public class ClientServiceTest extends Assert {
         master.setSkill("Skill");
         master.setStudios(null);
         master.setStyle("Style");
+        return master;
     }
 
-    @Before
-    public void createClient() {
+    public Client createClient() {
         client = new Client();
         client.setClientId(1L);
         client.setAge(18);
@@ -84,5 +94,6 @@ public class ClientServiceTest extends Assert {
         client.setName("Test name");
         client.setUsername(user);
         client.setMaster(null);
+        return client;
     }
 }
