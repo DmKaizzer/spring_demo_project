@@ -1,12 +1,6 @@
 package com.example.demo.dto;
 
 import com.example.demo.dao.Client;
-import com.example.demo.dao.Master;
-import com.example.demo.dao.User;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 @Data

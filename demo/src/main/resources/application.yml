@@ -2,3 +2,16 @@ spring:
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/master.yml
+  data:
+    redis:
+      port: 6379
+      sentinel:
+        master: mymaster
+        nodes: localhost
+      timeout: 600ms
+  cache:
+    type: redis
+    redis:
+      cache-null-values: false
+      time-to-live: 30000
+

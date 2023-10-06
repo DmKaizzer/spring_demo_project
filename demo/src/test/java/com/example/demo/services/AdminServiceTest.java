@@ -6,23 +6,22 @@ import com.example.demo.dto.AuthorityDTO;
 import com.example.demo.dto.UserDTO;
 import com.example.demo.repository.AuthorityRepository;
 import com.example.demo.repository.UserRepository;
-import com.example.demo.services.AdminService;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.beans.Encoder;
 import java.util.Optional;
 
-@RunWith(MockitoJUnitRunner.class)
-public class AdminServiceTest extends Assert {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@ExtendWith(MockitoExtension.class)
+public class AdminServiceTest {
+
     @InjectMocks
     public AdminService adminService;
 
@@ -36,66 +35,64 @@ public class AdminServiceTest extends Assert {
     public User user;
     public Authority authority;
 
+    @BeforeEach
+    public void init() {
+        user = createUser();
+    }
+
     @Test
     public void createUserTest() {
         UserDTO userDTO = UserDTO.parseUser(user);
-        userDTO.setUsername("USER DTO TEST NAME");
+        Mockito.when(encoder.encode(userDTO.getPassword())).thenReturn(user.getPassword());
         User testUser = adminService.createUser(userDTO);
-        assertNotNull(testUser);
-        assertEquals(testUser.getUsername(), userDTO.getUsername());
+        assertEquals(testUser, user);
     }
 
     @Test
     public void updateUserTest() {
-        Optional<User> userEx = Optional.of(user);
-        Mockito.when(userRepository.findById(user.getId())).thenReturn(userEx);
+        Optional<User> userOptional = Optional.of(createUser());
         UserDTO userDTO = UserDTO.parseUser(user);
         userDTO.setUsername("Test_2");
-        User expectedUser = adminService.updateUser(userDTO);
-        assertNotNull(expectedUser);
-        assertEquals(user.getId(), expectedUser.getId());
-        assertNotEquals(user.getUsername(), expectedUser.getUsername());
+        Mockito.when(userRepository.findById(userDTO.getId())).thenReturn(userOptional);
+        User testUser = adminService.updateUser(userDTO);
+        user.setUsername("Test_2");
+        assertEquals(user, testUser);
     }
 
     @Test
     public void softDeleteUser() {
-        Optional<User> userEx = Optional.of(user);
+        Optional<User> userOptional = Optional.of(createUser());
         UserDTO userDTO = UserDTO.parseUser(user);
-        Mockito.when(userRepository.findById(user.getId())).thenReturn(userEx);
-        //user обновляется вместе с expectedUser
-        UserDTO expectedUser = adminService.softDeleteUser(userDTO.getId());
-        assertNotNull(expectedUser);
-        assertEquals(user.getId(), expectedUser.getId());
-//        assertNotEquals(user.getIsDeleted(), expectedUser.getIsDeleted()); не работает!!!!
-        assertTrue(expectedUser.getIsDeleted());
+        Mockito.when(userRepository.findById(userDTO.getId())).thenReturn(userOptional);
+        UserDTO testUser = adminService.softDeleteUser(userDTO.getId());
+        user.setIsDeleted(true);
+        assertEquals(UserDTO.parseUser(user), testUser);
     }
 
     @Test
     public void addAuthority() {
         Mockito.when(userRepository.findUserByUsername(authority.getUsername().getUsername())).thenReturn(user);
         AuthorityDTO newAuthority = new AuthorityDTO();
-        newAuthority.setAuthority(authority.getAuthority());
-        newAuthority.setUsername(user.getUsername());
+        newAuthority.setAuthority("ADMIN");
+        newAuthority.setUsername("Test");
         AuthorityDTO expectedAuthority = adminService.addAuthority(newAuthority);
-        assertNotNull(expectedAuthority);
-        assertEquals(expectedAuthority.getUsername(), user.getUsername());
-        assertEquals(expectedAuthority.getAuthority(), authority.getAuthority());
+        assertEquals(AuthorityDTO.parseAuthorityDTO(authority), expectedAuthority);
     }
 
-    @Before
-    public void createUser() {
-        user = new User();
+    public User createUser() {
+        User user = new User();
         user.setId(1);
         user.setUsername("Test");
         user.setEnabled(true);
         user.setEmail("gmail.com");
-        user.setPassword("test_psw");
+        user.setPassword("testpsw");
         user.setLastActivity("2023-12-12");
         user.setPriority(5);
         user.setIsDeleted(false);
+        return user;
     }
 
-    @Before
+    @BeforeEach
     public void createAuthority() {
         authority = new Authority();
         authority.setAuthority("ADMIN");

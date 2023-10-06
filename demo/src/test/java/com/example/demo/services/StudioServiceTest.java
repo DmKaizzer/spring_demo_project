@@ -4,23 +4,24 @@ import com.example.demo.dao.Master;
 import com.example.demo.dao.Studio;
 import com.example.demo.dao.StudioId;
 import com.example.demo.dao.User;
-import com.example.demo.dto.MasterDTO;
 import com.example.demo.dto.StudioDTO;
 import com.example.demo.repository.MasterRepository;
 import com.example.demo.repository.StudioRepository;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Optional;
 
-@RunWith(MockitoJUnitRunner.class)
-public class StudioServiceTest extends Assert {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@ExtendWith(MockitoExtension.class)
+public class StudioServiceTest {
     @InjectMocks
     StudioService studioService;
     @Mock
@@ -32,28 +33,33 @@ public class StudioServiceTest extends Assert {
     public User user;
     public Master master;
 
+    @BeforeEach
+    public void init() {
+        studio = createStudio();
+        user = createUser();
+        master = createMaster();
+    }
+
     @Test
     public void addStudio() {
-        StudioId studioId = new StudioId("2_test", "2_address_test");
+        StudioId studioId = new StudioId("TestTitle", "TestAddress");
         Studio studioTest = studioService.addStudio(studioId);
-        assertNotNull(studioId);
-        assertEquals(studioTest.getStudioId(), studioId);
+        assertEquals(studio, studioTest);
     }
 
     @Test
     public void addMasterTest() {
-        Optional<Studio> studioEx = Optional.of(studio);
-        Optional<Master> masterEx = Optional.of(master);
+        Optional<Studio> studioEx = Optional.of(createStudio());
+        Optional<Master> masterEx = Optional.of(createMaster());
         Mockito.when(studioRepository.findById(studio.getStudioId())).thenReturn(studioEx);
         Mockito.when(masterRepository.findById(master.getId())).thenReturn(masterEx);
         StudioDTO studioDTO = studioService.addMaster(studio.getStudioId(), master.getId());
-        assertNotNull(studioDTO);
-        assertNotNull(studioDTO.getMaster());
-        assertTrue(studioDTO.getMaster().contains(MasterDTO.parseMaster(master)));
+        Studio expectedStudio = createStudio();
+        expectedStudio.setMasters(List.of(createMaster()));
+        assertEquals(StudioDTO.parseStudio(expectedStudio), studioDTO);
     }
 
-    @Before
-    public void createUser() {
+    public User createUser() {
         user = new User();
         user.setId(1);
         user.setUsername("Test");
@@ -63,10 +69,10 @@ public class StudioServiceTest extends Assert {
         user.setLastActivity("2023-12-12");
         user.setPriority(5);
         user.setIsDeleted(false);
+        return user;
     }
 
-    @Before
-    public void createMaster() {
+    public Master createMaster() {
         master = new Master();
         master.setId(1L);
         master.setLastName("TestMaster lastName");
@@ -75,12 +81,13 @@ public class StudioServiceTest extends Assert {
         master.setSkill("Skill");
         master.setStudios(null);
         master.setStyle("Style");
+        return master;
     }
 
-    @Before
-    public void createStudio() {
+    public Studio createStudio() {
         studio = new Studio();
         studio.setStudioId(new StudioId("TestTitle", "TestAddress"));
         studio.setMasters(null);
+        return studio;
     }
 }
