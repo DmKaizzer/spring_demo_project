@@ -5,7 +5,7 @@ import com.example.demo.dao.User;
 import com.example.demo.dto.AuthorityDTO;
 import com.example.demo.dto.UserDTO;
 import com.example.demo.repository.AuthorityRepository;
-import com.example.demo.repository.UserRepository;
+import com.example.demo.repository.JpaUserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +26,7 @@ public class AdminServiceTest {
     public AdminService adminService;
 
     @Mock
-    UserRepository userRepository;
+    JpaUserRepository jpaUserRepository;
     @Mock
     AuthorityRepository authorityRepository;
     @Mock
@@ -53,7 +53,7 @@ public class AdminServiceTest {
         Optional<User> userOptional = Optional.of(createUser());
         UserDTO userDTO = UserDTO.parseUser(user);
         userDTO.setUsername("Test_2");
-        Mockito.when(userRepository.findById(userDTO.getId())).thenReturn(userOptional);
+        Mockito.when(jpaUserRepository.findById(userDTO.getId())).thenReturn(userOptional);
         User testUser = adminService.updateUser(userDTO);
         user.setUsername("Test_2");
         assertEquals(user, testUser);
@@ -63,7 +63,7 @@ public class AdminServiceTest {
     public void softDeleteUser() {
         Optional<User> userOptional = Optional.of(createUser());
         UserDTO userDTO = UserDTO.parseUser(user);
-        Mockito.when(userRepository.findById(userDTO.getId())).thenReturn(userOptional);
+        Mockito.when(jpaUserRepository.findById(userDTO.getId())).thenReturn(userOptional);
         UserDTO testUser = adminService.softDeleteUser(userDTO.getId());
         user.setIsDeleted(true);
         assertEquals(UserDTO.parseUser(user), testUser);
@@ -71,7 +71,7 @@ public class AdminServiceTest {
 
     @Test
     public void addAuthority() {
-        Mockito.when(userRepository.findUserByUsername(authority.getUsername().getUsername())).thenReturn(user);
+        Mockito.when(jpaUserRepository.findUserByUsername(authority.getUsername().getUsername())).thenReturn(user);
         AuthorityDTO newAuthority = new AuthorityDTO();
         newAuthority.setAuthority("ADMIN");
         newAuthority.setUsername("Test");
