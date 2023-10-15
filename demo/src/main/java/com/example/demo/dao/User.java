@@ -6,13 +6,10 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 
-
 @Entity
 @Table(name = "users")
 @Data
 public class User {
-    //TODO: почему плохо генерировать ламбуком хэшкод и иквалс
-    //TODO: outer join
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)

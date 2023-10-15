@@ -3,10 +3,14 @@ package com.example.demo.dto;
 import com.example.demo.dao.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.redis.core.RedisHash;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
+@RedisHash(value = "user", timeToLive = 60L)
 public class UserDTO {
+    @Id
     private Integer id;
     private String username;
     private String password;
