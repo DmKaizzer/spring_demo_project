@@ -6,6 +6,7 @@ import com.example.demo.dto.AuthorityDTO;
 import com.example.demo.dto.UserDTO;
 import com.example.demo.repository.AuthorityRepository;
 import com.example.demo.repository.JpaUserRepository;
+import com.example.demo.repository.RedisUserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,6 +28,8 @@ public class AdminServiceTest {
 
     @Mock
     JpaUserRepository jpaUserRepository;
+    @Mock
+    RedisUserRepository redisUserRepository;
     @Mock
     AuthorityRepository authorityRepository;
     @Mock

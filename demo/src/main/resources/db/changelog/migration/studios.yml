@@ -9,7 +9,11 @@ databaseChangeLog:
               - column:
                   name: title
                   type: varchar(100)
+                  constraints:
+                    nullable: false
               - column:
+                  constraints:
+                    nullable: false
                   name: address
                   type: varchar(255)
   - changeSet:
