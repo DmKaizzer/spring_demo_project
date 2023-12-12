@@ -1,0 +1,24 @@
+services:
+  db_pg_15:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: demoproject
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password!456
+    ports:
+      - 5432
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - 6379:6379
+    environment:
+      - REDIS_PORT=6379
+    command: redis-server
+
+  spring_demo:
+    container_name: spring-demo
+    build: ./
+    ports:
+      - 8080:8080
+    command: "java -jar ./application.jar"
